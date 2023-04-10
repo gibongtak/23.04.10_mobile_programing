@@ -1,21 +1,24 @@
 package com.example.a230410widget_button_textbox;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     EditText edit1, edit2;
-    Button btnAdd, btnSub, btnMul, btnDiv;
+    Button btnAdd, btnSub, btnMul, btnDiv1, btnDiv2;
     TextView textResult;
     String num1, num2;
-    Integer result;
+    Double result;
 
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,50 +30,98 @@ public class MainActivity extends AppCompatActivity {
         btnAdd = (Button) findViewById(R.id.ButAdd);
         btnSub = (Button) findViewById(R.id.ButSub);
         btnMul = (Button) findViewById(R.id.ButMul);
-        btnDiv = (Button) findViewById(R.id.ButDiv);
+        btnDiv1 = (Button) findViewById(R.id.ButDiv1);
+        btnDiv2 = (Button) findViewById(R.id.ButDiv2);
         textResult = (TextView) findViewById(R.id.TextResult);
 
-        btnAdd.setOnTouchListener(new View.OnTouchListener() {
+        btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onClick(View view) {
                 num1 = edit1.getText().toString();
                 num2 = edit2.getText().toString();
-                result = Integer.parseInt(num1) + Integer.parseInt(num2);
-                textResult.setText("계산 결과 : " + result.toString());
-                return false;
+                if(num1.trim().equals("") || num2.trim().equals(""))
+                {
+                    Toast.makeText(getApplicationContext(), "값을 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    result = Double.parseDouble(num1) + Double.parseDouble(num2);
+                    textResult.setText("계산 결과 : " + result.toString());
+                }
             }
         });
-
-        btnSub.setOnTouchListener(new View.OnTouchListener() {
+        btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onClick(View view) {
                 num1 = edit1.getText().toString();
                 num2 = edit2.getText().toString();
-                result = Integer.parseInt(num1) - Integer.parseInt(num2);
-                textResult.setText("계산 결과 : " + result.toString());
-                return false;
+                if(num1.trim().equals("") || num2.trim().equals(""))
+                {
+                    Toast.makeText(getApplicationContext(), "값을 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    result = Double.parseDouble(num1) - Double.parseDouble(num2);
+                    textResult.setText("계산 결과 : " + result.toString());
+                }
             }
         });
-
-        btnMul.setOnTouchListener(new View.OnTouchListener() {
+        btnMul.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onClick(View view) {
                 num1 = edit1.getText().toString();
                 num2 = edit2.getText().toString();
-                result = Integer.parseInt(num1) * Integer.parseInt(num2);
-                textResult.setText("계산 결과 : " + result.toString());
-                return false;
+                if(num1.trim().equals("") || num2.trim().equals(""))
+                {
+                    Toast.makeText(getApplicationContext(), "값을 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    result = Double.parseDouble(num1) * Double.parseDouble(num2);
+                    textResult.setText("계산 결과 : " + result.toString());
+                }
             }
         });
-
-        btnDiv.setOnTouchListener(new View.OnTouchListener() {
+        btnDiv1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public void onClick(View view) {
                 num1 = edit1.getText().toString();
                 num2 = edit2.getText().toString();
-                result = Integer.parseInt(num1) / Integer.parseInt(num2);
-                textResult.setText("계산 결과 : " + result.toString());
-                return false;
+                if(num1.trim().equals("") || num2.trim().equals(""))
+                {
+                    Toast.makeText(getApplicationContext(), "값을 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    if(num2.trim().equals("0"))
+                    {
+                        Toast.makeText(getApplicationContext(), "0으로 나눌 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        result = Double.parseDouble(num1) / Double.parseDouble(num2);
+                        textResult.setText("계산 결과 : " + result.toString());
+                    }
+                }
+
+            }
+        });
+        btnDiv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                num1 = edit1.getText().toString();
+                num2 = edit2.getText().toString();
+                if(num1.trim().equals("") || num2.trim().equals("")) {
+                    Toast.makeText(getApplicationContext(), "값을 입력하세요.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if (num2.trim().equals("0")) {
+                        Toast.makeText(getApplicationContext(), "0으로 나눌 수 없습니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        result = Double.parseDouble(num1) % Double.parseDouble(num2);
+                        textResult.setText("계산 결과 : " + result.toString());
+                    }
+                }
             }
         });
     }
